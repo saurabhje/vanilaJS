@@ -47,6 +47,31 @@ class LinkedList{
         }
         return current.value;
     }
+    pop(){
+        if(!this.head){
+            return "Empty List";
+        }
+        if(!this.head.next){
+            this.head = null;
+            return;
+        }
+        let current = this.head;
+        let previousNode;
+        while(current.next){
+            previousNode = current;
+            current = current.next;
+        } 
+        previousNode.next = null;      
+    }
+    contains(value){
+
+    }
+    find(value){
+
+    }
+    toString(){
+        
+    }
 }
 
 class Node{
@@ -68,4 +93,6 @@ console.log(list.Head());
 list.append(3);
 console.log(list.tail());
 list.append(4);
+console.log(list.tail());
+list.pop();
 console.log(list.tail());
