@@ -114,7 +114,6 @@ class LinkedList{
         return result;
     }
 
-
     insertAt(value, index){
         
         if(index == 0){
@@ -162,7 +161,6 @@ class Node{
         this.next = null;
     }
 }
-
 
 // testing
 const list = new LinkedList();
