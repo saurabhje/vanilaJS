@@ -1,20 +1,22 @@
 class LinkedList{
     constructor(){
         this.head = null;
+        this.tail = null;
+        this.size = 0;
     }
-
 
     append(value){
         let endNode = new Node(value);
         if(!this.head){
             this.head = endNode;
+            this.tail = endNode;
             return;
         }
-        let current = this.head;
-        while(current.next){
-            current = current.next;
+        else{
+            this.tail.next = endNode;
+            this.tail = endNode;
         }
-        current.next = endNode;
+        this.size++;
     }
 
 
@@ -22,33 +24,23 @@ class LinkedList{
         let startNode = new Node(value);
         startNode.next = this.head;
         this.head = startNode;
-    }
-
-
-    size(){
-        let size = 0;
-        let current = this.head;
-        while(current.next){
-            current = current.next;
-            size ++;
+        if(!this.tail){
+            this.tail = startNode;
         }
-        return size;
+        this.size++;
     }
 
+    Size(){
+        return this.size;
+    }
 
     Head(){
         return this.head.value;
     }
 
-
-    tail(){
-        let current = this.head;
-        while(current.next){
-            current = current.next;
-        }
-        return current.value;
+    Tail(){
+        return this.tail.value;
     }
-
 
     at(index){
         let current = this.head;
@@ -60,24 +52,26 @@ class LinkedList{
         return current.value;
     }
 
-
-    pop(){
+     pop(){
         if(!this.head){
             return "Empty List";
         }
-        if(!this.head.next){
-            this.head = null;
-            return;
-        }
         let current = this.head;
-        let previousNode;
+        let previousNode = null;
         while(current.next){
             previousNode = current;
             current = current.next;
         } 
-        previousNode.next = null;      
+        if(previousNode){
+            previousNode.next = null;
+            this.tail = previousNode;
+        }
+        else{
+            this.tail = null;
+            this.head = null;
+        }
+        this.size--;    
     }
-
 
     contains(value){
         let current = this.head;
@@ -92,7 +86,6 @@ class LinkedList{
         }
         return false;
     }
-
 
     find(value){
         let current = this.head;
@@ -110,7 +103,6 @@ class LinkedList{
         return "No such value in the list";
     }
 
-
     toString(){
         let current = this.head;
         let result = "";
@@ -124,27 +116,29 @@ class LinkedList{
 
 
     insertAt(value, index){
-        let newNode = new Node(value);
+        
         if(index == 0){
-            newNode.next = this.head;
-            this.head = newNode;
+            this.prepend(value);
             return;
         }
-        if(!this.head){
-            this.head = newNode;
+        if(index == this.size){
+            this.append(value);
             return;
         }
-        let previousNode ;
+        let newNode = new Node(value);
+        let previousNode = null ;
         let current = this.head;
-        for(let kount = 0;kount<index;kount++){
+        let kount = 0;
+        while(kount < index){
             previousNode = current;
             current = current.next; 
+            kount++;
         }
         previousNode.next = newNode;
         newNode.next = current;
+        this.size++;
     }
 
-    
     remove(index){
         let current = this.head;
         if(index ==0){
@@ -157,6 +151,7 @@ class LinkedList{
             current = current.next;
         }
         previousNode.next = current.next;
+        this.size--;
         return;
     }
 }
@@ -180,13 +175,13 @@ console.log(list.Head());
 list.prepend(6);
 console.log(list.Head());
 list.append(3);
-console.log(list.tail());
+console.log(list.Tail());
 list.append(4);
 list.insertAt(9,0);
 console.log(list.contains(3));
-console.log(list.tail());
+console.log(list.Tail());
 list.pop();
-console.log(list.tail());
+console.log(list.Tail());
 console.log(list.find(5));
 list.remove(0);
 console.log(list.toString());
