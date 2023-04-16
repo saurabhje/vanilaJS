@@ -2,6 +2,8 @@ class LinkedList{
     constructor(){
         this.head = null;
     }
+
+
     append(value){
         let endNode = new Node(value);
         if(!this.head){
@@ -14,11 +16,15 @@ class LinkedList{
         }
         current.next = endNode;
     }
+
+
     prepend(value){
         let startNode = new Node(value);
         startNode.next = this.head;
         this.head = startNode;
     }
+
+
     size(){
         let size = 0;
         let current = this.head;
@@ -28,9 +34,13 @@ class LinkedList{
         }
         return size;
     }
+
+
     Head(){
         return this.head.value;
     }
+
+
     tail(){
         let current = this.head;
         while(current.next){
@@ -38,6 +48,8 @@ class LinkedList{
         }
         return current.value;
     }
+
+
     at(index){
         let current = this.head;
         let count = 0;
@@ -47,6 +59,8 @@ class LinkedList{
         }
         return current.value;
     }
+
+
     pop(){
         if(!this.head){
             return "Empty List";
@@ -63,6 +77,8 @@ class LinkedList{
         } 
         previousNode.next = null;      
     }
+
+
     contains(value){
         let current = this.head;
         if(!this.head){
@@ -76,6 +92,8 @@ class LinkedList{
         }
         return false;
     }
+
+
     find(value){
         let current = this.head;
         let index = 0;
@@ -91,6 +109,8 @@ class LinkedList{
         }
         return "No such value in the list";
     }
+
+
     toString(){
         let current = this.head;
         let result = "";
@@ -101,6 +121,8 @@ class LinkedList{
         result += "null";
         return result;
     }
+
+
     insertAt(value, index){
         let newNode = new Node(value);
         if(index == 0){
@@ -121,6 +143,8 @@ class LinkedList{
         previousNode.next = newNode;
         newNode.next = current;
     }
+
+    
     remove(index){
         let current = this.head;
         if(index ==0){
