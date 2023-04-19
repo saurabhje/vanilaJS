@@ -74,6 +74,16 @@ class Node{
         return node;
       }
     }
+
+    Find(value, node = this.root){
+        if(node === null ) return null;
+        if(value != node.data){
+          return value > node.data 
+            ?this.Find(value, node.right)
+            :this.Find(value, node.left);
+        }
+        return node;
+    }
     
     prettyPrint = (node = this.root, prefix = '', isLeft = true) => {
       if (!node) {
@@ -96,5 +106,6 @@ class Node{
 
   newTree.prettyPrint();
   newTree.Remove(23);
+  console.log(newTree.Find(7));
   newTree.prettyPrint();
   
