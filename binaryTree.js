@@ -48,7 +48,33 @@ class Node{
         }
       }
     }
-  
+
+    Remove(value, node = this.root) {
+      if (!node) {
+        return null;
+      }
+      if (value < node.data) {
+        node.left = this.Remove(value, node.left);
+        return node;
+      } else if (value > node.data) {
+        node.right = this.Remove(value, node.right);
+        return node;
+      } else {
+        if (!node.left) {
+          return node.right;
+        } else if (!node.right) {
+          return node.left;
+        }
+        let temp = node.right;
+        while (temp.left) {
+          temp = temp.left;
+        }
+        node.data = temp.data;
+        node.right = this.Remove(temp.data, node.right);
+        return node;
+      }
+    }
+    
     prettyPrint = (node = this.root, prefix = '', isLeft = true) => {
       if (!node) {
           return;
@@ -63,6 +89,12 @@ class Node{
     }
   }
   
+
+  //Testing
   let newTree = new Tree([1, 7, 4, 23, 8, 9, 4, 3, 5, 7, 9, 67, 6345, 324]);
+  newTree.insert(2);
+
+  newTree.prettyPrint();
+  newTree.Remove(23);
   newTree.prettyPrint();
   
